@@ -48,13 +48,12 @@ class ProviderAPINinjaTestCase(TestCase):
         expected_response = {
             'success': False
         }
+        mock_requests.get.return_value.raise_for_status.side_effect = Exception()
 
         response = send_request_temperature(
             city=self.city,
             country=self.country
         )
-
-        mock_requests.get.return_value.raise_for_status.side_effect = Exception()
 
         self.assertDictEqual(response, expected_response)
 
